@@ -49,7 +49,7 @@ const VOCAB={
 LESSONS.forEach((l,n)=>{l.vocab=VOCAB[l.id];l.sents=SENT[l.id].s;l.reads=[SENT[l.id].r];l.pool=LESSONS.slice(0,n+1).flatMap(x=>x.sym)});
 LESSONS.push({id:'all',name:'期中測驗',sub:'九課混合 36 題',sym:LESSONS.flatMap(l=>l.sym),vocab:LESSONS.flatMap(l=>l.vocab),sents:LESSONS.flatMap(l=>l.sents),reads:LESSONS.flatMap(l=>l.reads),pool:LESSONS.flatMap(l=>l.sym)});
 // 介面文字的注音對照：先比對句子裡的語詞（才能標對輕聲），再查單字。
-const UI_ZY='小ㄒㄧㄠ3一ㄧ1國ㄍㄨㄛ2語ㄩ3互ㄏㄨ4動ㄉㄨㄥ4學ㄒㄩㄝ2習ㄒㄧ2卷ㄐㄩㄢ4姓ㄒㄧㄥ4名ㄇㄧㄥ2年ㄋㄧㄢ2級ㄐㄧ2上ㄕㄤ4期ㄑㄧ2注ㄓㄨ4音ㄧㄣ1符ㄈㄨ2號ㄏㄠ4第ㄉㄧ4到ㄉㄠ4九ㄐㄧㄡ3課ㄎㄜ4對ㄉㄨㄟ4應ㄧㄥ4康ㄎㄤ1軒ㄒㄩㄢ1版ㄅㄢ3進ㄐㄧㄣ4度ㄉㄨ4二ㄦ4三ㄙㄢ1四ㄙ4五ㄨ3六ㄌㄧㄡ4七ㄑㄧ1八ㄅㄚ1十ㄕ2咪ㄇㄧ1鵝ㄜ2寶ㄅㄠ3河ㄏㄜ2馬ㄇㄚ3和ㄏㄢ4狸ㄌㄧ2嘻ㄒㄧ1翹ㄑㄧㄠ4板ㄅㄢ3龜ㄍㄨㄟ1兔ㄊㄨ4賽ㄙㄞ4物ㄨ4狂ㄎㄨㄤ2歡ㄏㄨㄢ1會ㄏㄨㄟ4中ㄓㄨㄥ1測ㄘㄜ4驗ㄧㄢ4混ㄏㄨㄣ4合ㄏㄜ2題ㄊㄧ2最ㄗㄨㄟ4高ㄍㄠ1分ㄈㄣ1出ㄔㄨ1打ㄉㄚ3亂ㄌㄨㄢ4本ㄅㄣ3型ㄒㄧㄥ2順ㄕㄨㄣ4序ㄒㄩ4聽ㄊㄧㄥ1選ㄒㄩㄢ3這ㄓㄜ4是ㄕ4哪ㄋㄚ3類ㄌㄟ4看ㄎㄢ4圖ㄊㄨ2拼ㄆㄧㄣ1聲ㄕㄥ1調ㄉㄧㄠ4連ㄌㄧㄢ2詞ㄘ2填ㄊㄧㄢ2句ㄐㄩ4子ㄗ5把ㄅㄚ3排ㄆㄞ2好ㄏㄠ3樣ㄧㄤ4嗎ㄇㄚ5讀ㄉㄨ2短ㄉㄨㄢ3文ㄨㄣ2回ㄏㄨㄟ2答ㄉㄚ2問ㄨㄣ4共ㄍㄨㄥ4念ㄋㄧㄢ4給ㄍㄟ3我ㄨㄛ3介ㄐㄧㄝ4韻ㄩㄣ4結ㄐㄧㄝ2不ㄅㄨ4先ㄒㄧㄢ1點ㄉㄧㄢ3張ㄓㄤ1再ㄗㄞ4它ㄊㄚ1請ㄑㄧㄥ3想ㄒㄧㄤ3換ㄏㄨㄢ4個ㄍㄜ5試ㄕ4重ㄔㄨㄥ2新ㄒㄧㄣ1了ㄌㄜ5就ㄐㄧㄡ4案ㄢ4全ㄑㄩㄢ2部ㄅㄨ4下ㄒㄧㄚ4成ㄔㄥ2績ㄐㄧ1練ㄌㄧㄢ4次ㄘ4太ㄊㄞ4棒ㄅㄤ4步ㄅㄨ4更ㄍㄥ4熟ㄕㄡ2慢ㄇㄢ4來ㄌㄞ2幾ㄐㄧ3多ㄉㄨㄛ1要ㄧㄠ4複ㄈㄨ4目ㄇㄨ4各ㄍㄜ4數ㄕㄨ4判ㄆㄢ4斷ㄉㄨㄢ4台ㄊㄞ2裝ㄓㄨㄤ1置ㄓ4無ㄨ2法ㄈㄚ3播ㄅㄛ1放ㄈㄤ4家ㄐㄧㄚ1長ㄓㄤ3著ㄓㄜ5誰ㄕㄟ2什ㄕㄣ2麼ㄇㄜ5別ㄅㄧㄝ2的ㄉㄜ5從ㄘㄨㄥ2去ㄑㄩ4快ㄎㄨㄞ4在ㄗㄞ4首ㄕㄡ3頁ㄧㄝ4論ㄌㄨㄣ4記ㄐㄧ4牢ㄌㄠ2越ㄩㄝ4又ㄧㄡ4做ㄗㄨㄛ4每ㄇㄟ3算ㄙㄨㄢ4得ㄉㄜ5考ㄎㄠ3字ㄗ4行ㄏㄤ2搶ㄑㄧㄤ3開ㄎㄞ1始ㄕ3離ㄌㄧ2時ㄕ2間ㄐㄧㄢ1正ㄓㄥ4確ㄑㄩㄝ4錯ㄘㄨㄛ4榜ㄅㄤ3功ㄍㄨㄥ1謝ㄒㄧㄝ4跑ㄆㄠ3圈ㄑㄩㄢ1有ㄧㄡ3很ㄏㄣ3玩ㄨㄢ2面ㄇㄧㄢ4後ㄏㄡ4起ㄑㄧ3都ㄉㄡ1完ㄨㄢ2翻ㄈㄢ1牌ㄆㄞ2配ㄆㄟ4找ㄓㄠ3往ㄨㄤ3前ㄑㄧㄢ2走ㄗㄡ3幫ㄅㄤ1已ㄧ3經ㄐㄧㄥ1隻ㄓ1拿ㄋㄚ2地ㄉㄧ4鼠ㄕㄨ3單ㄉㄢ1贏ㄧㄥ2顆ㄎㄜ1你ㄋㄧ3星ㄒㄧㄥ1戲ㄒㄧ4遊ㄧㄡ2先ㄒㄧㄢ1';
+const UI_ZY='小ㄒㄧㄠ3一ㄧ1國ㄍㄨㄛ2語ㄩ3互ㄏㄨ4動ㄉㄨㄥ4學ㄒㄩㄝ2習ㄒㄧ2卷ㄐㄩㄢ4姓ㄒㄧㄥ4名ㄇㄧㄥ2年ㄋㄧㄢ2級ㄐㄧ2上ㄕㄤ4期ㄑㄧ2注ㄓㄨ4音ㄧㄣ1符ㄈㄨ2號ㄏㄠ4第ㄉㄧ4到ㄉㄠ4九ㄐㄧㄡ3課ㄎㄜ4對ㄉㄨㄟ4應ㄧㄥ4康ㄎㄤ1軒ㄒㄩㄢ1版ㄅㄢ3進ㄐㄧㄣ4度ㄉㄨ4二ㄦ4三ㄙㄢ1四ㄙ4五ㄨ3六ㄌㄧㄡ4七ㄑㄧ1八ㄅㄚ1十ㄕ2咪ㄇㄧ1鵝ㄜ2寶ㄅㄠ3河ㄏㄜ2馬ㄇㄚ3和ㄏㄢ4狸ㄌㄧ2嘻ㄒㄧ1翹ㄑㄧㄠ4板ㄅㄢ3龜ㄍㄨㄟ1兔ㄊㄨ4賽ㄙㄞ4物ㄨ4狂ㄎㄨㄤ2歡ㄏㄨㄢ1會ㄏㄨㄟ4中ㄓㄨㄥ1測ㄘㄜ4驗ㄧㄢ4混ㄏㄨㄣ4合ㄏㄜ2題ㄊㄧ2最ㄗㄨㄟ4高ㄍㄠ1分ㄈㄣ1出ㄔㄨ1打ㄉㄚ3亂ㄌㄨㄢ4本ㄅㄣ3型ㄒㄧㄥ2順ㄕㄨㄣ4序ㄒㄩ4聽ㄊㄧㄥ1選ㄒㄩㄢ3這ㄓㄜ4是ㄕ4哪ㄋㄚ3類ㄌㄟ4看ㄎㄢ4圖ㄊㄨ2拼ㄆㄧㄣ1聲ㄕㄥ1調ㄉㄧㄠ4連ㄌㄧㄢ2詞ㄘ2填ㄊㄧㄢ2句ㄐㄩ4子ㄗ5把ㄅㄚ3排ㄆㄞ2好ㄏㄠ3樣ㄧㄤ4嗎ㄇㄚ5讀ㄉㄨ2短ㄉㄨㄢ3文ㄨㄣ2回ㄏㄨㄟ2答ㄉㄚ2問ㄨㄣ4共ㄍㄨㄥ4念ㄋㄧㄢ4給ㄍㄟ3我ㄨㄛ3介ㄐㄧㄝ4韻ㄩㄣ4結ㄐㄧㄝ2不ㄅㄨ4先ㄒㄧㄢ1點ㄉㄧㄢ3張ㄓㄤ1再ㄗㄞ4它ㄊㄚ1請ㄑㄧㄥ3想ㄒㄧㄤ3換ㄏㄨㄢ4個ㄍㄜ5試ㄕ4重ㄔㄨㄥ2新ㄒㄧㄣ1了ㄌㄜ5就ㄐㄧㄡ4案ㄢ4全ㄑㄩㄢ2部ㄅㄨ4下ㄒㄧㄚ4成ㄔㄥ2績ㄐㄧ1練ㄌㄧㄢ4次ㄘ4太ㄊㄞ4棒ㄅㄤ4步ㄅㄨ4更ㄍㄥ4熟ㄕㄡ2慢ㄇㄢ4來ㄌㄞ2幾ㄐㄧ3多ㄉㄨㄛ1要ㄧㄠ4複ㄈㄨ4目ㄇㄨ4各ㄍㄜ4數ㄕㄨ4判ㄆㄢ4斷ㄉㄨㄢ4台ㄊㄞ2裝ㄓㄨㄤ1置ㄓ4無ㄨ2法ㄈㄚ3播ㄅㄛ1放ㄈㄤ4家ㄐㄧㄚ1長ㄓㄤ3著ㄓㄜ5誰ㄕㄟ2什ㄕㄣ2麼ㄇㄜ5別ㄅㄧㄝ2的ㄉㄜ5射ㄕㄜ4接ㄐㄧㄝ1住ㄓㄨ4移ㄧ2園ㄩㄢ2挑ㄊㄧㄠ1貼ㄊㄧㄝ1紙ㄓ3布ㄅㄨ4泡ㄆㄠ4找ㄓㄠ3從ㄘㄨㄥ2去ㄑㄩ4快ㄎㄨㄞ4在ㄗㄞ4首ㄕㄡ3頁ㄧㄝ4論ㄌㄨㄣ4記ㄐㄧ4牢ㄌㄠ2越ㄩㄝ4又ㄧㄡ4做ㄗㄨㄛ4每ㄇㄟ3算ㄙㄨㄢ4得ㄉㄜ5考ㄎㄠ3字ㄗ4行ㄏㄤ2搶ㄑㄧㄤ3開ㄎㄞ1始ㄕ3離ㄌㄧ2時ㄕ2間ㄐㄧㄢ1正ㄓㄥ4確ㄑㄩㄝ4錯ㄘㄨㄛ4榜ㄅㄤ3功ㄍㄨㄥ1謝ㄒㄧㄝ4跑ㄆㄠ3圈ㄑㄩㄢ1有ㄧㄡ3很ㄏㄣ3玩ㄨㄢ2面ㄇㄧㄢ4後ㄏㄡ4起ㄑㄧ3都ㄉㄡ1完ㄨㄢ2翻ㄈㄢ1牌ㄆㄞ2配ㄆㄟ4找ㄓㄠ3往ㄨㄤ3前ㄑㄧㄢ2走ㄗㄡ3幫ㄅㄤ1已ㄧ3經ㄐㄧㄥ1隻ㄓ1拿ㄋㄚ2地ㄉㄧ4鼠ㄕㄨ3單ㄉㄢ1贏ㄧㄥ2顆ㄎㄜ1你ㄋㄧ3星ㄒㄧㄥ1戲ㄒㄧ4遊ㄧㄡ2先ㄒㄧㄢ1';
 const ZY_WORD=new Map(),ZY_ONE=new Map();
 T(UI_ZY).forEach(t=>ZY_ONE.set(t.c,t));
 T('做ㄗㄨㄛ4得ㄉㄜ5很ㄏㄣ3好ㄏㄠ3').forEach((t,n,a)=>{if(n===0)ZY_WORD.set('做得',a.slice(0,2))});
@@ -62,7 +62,7 @@ LESSONS.forEach(l=>{
   l.sents.forEach(s=>{s.ch.forEach(addZy);s.w.forEach(addZy)});
   l.reads.forEach(r=>{r.lines.flat().forEach(addZy);r.opts.forEach(addZy)});
 });
-const ANSWER_SEL='.cell,.ktile,.card,.hole';
+const ANSWER_SEL='.cell,.ktile,.card,.hole,.bubble,.fallstar';
 const CLOSERS=/[，。！？、：；」）]/;
 const zh=(text,withChar)=>{
   let out='',n=0;
@@ -378,10 +378,13 @@ function beep(ok){
   }catch(e){}
 }
 const lessonVoc=()=>{const out=[];lesson.vocab.forEach(v=>{if(!out.some(u=>u.p===v.p||key(u)===key(v)))out.push(v)});return out};
-const gameTop=text=>'<div class="gtop"><div class="sec">'+text+'</div><button class="gback" type="button" data-gback="1">回遊戲選單</button></div>';
+const gameTop=text=>'<div class="gtop"><div class="sec">'+text+'</div><button class="gback" type="button" data-gback="1">回選單</button></div>';
 function gameMenu(){
-  stopGame();
+  stopGame();document.body.classList.remove('playing');
   $('main').innerHTML='<div class="gtop"><div class="sec">選一個遊戲</div><div class="starline">你有 '+getStars()+' 顆星 ⭐</div></div><div class="gamelist">'+
+   '<button class="gamebtn" type="button" data-game="bubble"><span class="pic">🫧</span><span>魔法泡泡<small>射中對的注音</small></span></button>'+
+   '<button class="gamebtn" type="button" data-game="catch"><span class="pic">🐱</span><span>小貓接星星<small>移動小貓，接住對的注音</small></span></button>'+
+   '<button class="gamebtn" type="button" data-game="garden"><span class="pic">🌷</span><span>我的小花園<small>答對了，挑貼紙放花園</small></span></button>'+
    '<button class="gamebtn" type="button" data-game="memory"><span class="pic">🃏</span><span>翻牌配對<small>找出圖和注音</small></span></button>'+
    '<button class="gamebtn" type="button" data-game="mole"><span class="pic">'+themeOf().icon+'</span><span>注音打地鼠<small>打對的符號</small></span></button>'+
    '<button class="gamebtn" type="button" data-game="race"><span class="pic">🐢</span><span>龜兔賽跑<small>選對注音就往前走</small></span></button></div>';
@@ -390,7 +393,7 @@ function gameWin(game,stars,text){
   stopGame();
   if(stars)addStars(stars);
   beep(!!stars);
-  $('main').innerHTML='<div class="result"><div class="pic">'+(stars?'🏆':'🐰')+'</div><p class="say ok">'+text+'</p><div class="starline">'+(stars?'拿到 '+stars+' 顆星 '+'⭐'.repeat(stars)+'．':'')+'你有 '+getStars()+' 顆星</div><button class="next" style="margin:0" type="button" data-game="'+game+'">再玩一次</button><button class="gback" type="button" data-gback="1">回遊戲選單</button></div>';
+  $('main').innerHTML='<div class="result"><div class="pic">'+(stars?'🏆':'🐰')+'</div><p class="say ok">'+text+'</p><div class="starline">'+(stars?'拿到 '+stars+' 顆星 '+'⭐'.repeat(stars)+'．':'')+'你有 '+getStars()+' 顆星</div><button class="next" style="margin:0" type="button" data-game="'+game+'">再玩一次</button><button class="gback" type="button" data-gback="1">回選單</button></div>';
 }
 let mem=null;
 function startMemory(){
@@ -578,6 +581,177 @@ function liveEnd(){
   const place=rows.findIndex(r=>r.me)+1;
   $('main').innerHTML='<div class="stage klobby">'+decorHtml()+'<div class="kbig">排行榜</div><div class="say">第 '+place+' 名．答對 '+live.right+' 題，共 '+total+' 題'+(stars?'．拿到 '+stars+' 顆星 '+'⭐'.repeat(stars):'')+'</div><div class="board">'+rows.map((r,k)=>'<div class="brow'+(r.me?' me':'')+'"><span class="rank">'+(k+1)+'</span><span class="who" aria-hidden="true">'+r.who+'</span><span>'+r.label+'</span><span class="pts">'+r.pts+'</span></div>').join('')+'</div><button class="kstart" type="button" data-kstart="1">再玩一次</button><button class="kexit" type="button" data-kexit="1">回到選課</button></div>';
 }
+const GAME_GOAL=8;
+const sayBtn=w=>'<button class="speak" type="button" data-say="'+w.c+'">'+SPEAKER+'聽一聽</button>';
+const gamePrompt=w=>'<span class="pic" role="img" aria-label="'+w.c+'">'+w.p+'</span>'+sayBtn(w);
+const countText=n=>'⭐ '+n+'／'+GAME_GOAL;
+const arenaHtml=(title,inner)=>gameTop(title)+'<div class="ask slim" id="gprompt"></div><p class="hint" id="hint"></p><p class="hint" id="gcount">'+countText(0)+'</p><div class="arena" id="arena" style="background-image:url('+themeOf().img+')">'+inner+'</div>';
+function pickTarget(game){
+  const voc=lessonVoc();
+  game.target=take(voc.filter(v=>v!==game.target),1)[0];
+  $('gprompt').innerHTML=gamePrompt(game.target);
+  say(game.target.c);
+}
+function spawnWord(game){
+  const voc=lessonVoc();
+  const hasTarget=game.items.some(it=>it.w===game.target);
+  const used=game.items.map(it=>it.w);
+  return !hasTarget?game.target:(take(voc.filter(v=>!used.includes(v)&&v!==game.target),1)[0]||take(voc,1)[0]);
+}
+// 魔法泡泡：泡泡往上飄，點對的注音，魔法棒就射出星星。
+let bub=null;
+function startBubble(){
+  stopGame();
+  bub={hits:0,items:[],target:null,tick:0,n:0,lanes:0};
+  $('main').innerHTML=arenaHtml('魔法泡泡','<span class="wand" aria-hidden="true">🪄</span>');
+  const a=$('arena');
+  bub.lanes=a.clientWidth<520?3:4;
+  pickTarget(bub);
+  for(let k=0;k<bub.lanes;k++)spawnBubble(a.clientHeight*(.45+k*.3));
+  gTimers.push(setInterval(stepBubble,33));
+}
+function spawnBubble(y){
+  const a=$('arena');if(!a)return;
+  const w=spawnWord(bub),size=a.clientWidth/bub.lanes;
+  const lane=bub.n++%bub.lanes;
+  const el=document.createElement('button');
+  el.type='button';el.className='bubble';el.dataset.bub=String(bub.n);
+  el.innerHTML=zyw(w);
+  el.style.width=Math.min(size-8,124)+'px';el.style.height=Math.min(size-8,124)+'px';
+  el.style.left=(lane*size+(size-Math.min(size-8,124))/2)+'px';
+  a.appendChild(el);
+  const it={id:String(bub.n),w,el,y,busy:false};
+  el.style.transform='translateY('+y+'px)';
+  bub.items.push(it);
+}
+function stepBubble(){
+  const a=$('arena');if(!a||!bub)return;
+  bub.tick++;
+  bub.items.slice().forEach(it=>{
+    if(it.busy)return;
+    it.y-=1.1;
+    it.el.style.transform='translateY('+it.y+'px)';
+    if(it.y<-130){it.el.remove();bub.items=bub.items.filter(x=>x!==it)}
+  });
+  if(bub.tick%70===0&&bub.items.length<bub.lanes+1)spawnBubble(a.clientHeight);
+  if(!bub.items.some(it=>it.w===bub.target))spawnBubble(a.clientHeight);
+}
+function shootBubble(b){
+  const it=bub.items.find(x=>x.id===b.dataset.bub);if(!it||it.busy)return;
+  const a=$('arena'),box=a.getBoundingClientRect(),r=b.getBoundingClientRect();
+  const star=document.createElement('span');
+  star.className='shot';star.textContent='⭐';star.setAttribute('aria-hidden','true');
+  a.appendChild(star);
+  const x=r.left-box.left+r.width/2-16,y=r.top-box.top+r.height/2-16;
+  star.style.transform='translate('+(box.width/2-16)+'px,'+(box.height-50)+'px)';
+  star.getBoundingClientRect();
+  star.style.transform='translate('+x+'px,'+y+'px)';
+  it.busy=true;
+  gTimers.push(setTimeout(()=>{
+    star.remove();
+    if(!$('arena'))return;
+    if(it.w===bub.target){
+      beep(true);bub.hits++;
+      it.el.classList.add('popped');
+      gTimers.push(setTimeout(()=>it.el.remove(),220));
+      bub.items=bub.items.filter(q=>q!==it);
+      $('gcount').textContent=countText(bub.hits);
+      if(bub.hits>=GAME_GOAL){gameWin('bubble',3,'泡泡全部射中了！');return}
+      pickTarget(bub);
+    }else{
+      beep(false);it.busy=false;
+      it.el.classList.add('bad');
+      gTimers.push(setTimeout(()=>it.el.classList.remove('bad'),350));
+    }
+  },190));
+}
+// 小貓接星星：移動小貓，接住對的注音，接錯也不扣分。
+let ctc=null;
+function startCatch(){
+  stopGame();
+  ctc={hits:0,items:[],target:null,tick:0,x:.5};
+  $('main').innerHTML=arenaHtml('小貓接星星','<span class="catcher" id="catcher" aria-hidden="true">🐱</span>')+'<div class="movebtns"><button class="gback" type="button" data-move="-1" aria-label="往左">◀</button><button class="gback" type="button" data-move="1" aria-label="往右">▶</button></div>';
+  const a=$('arena');
+  const follow=e=>{const r=a.getBoundingClientRect();ctc.x=Math.max(.06,Math.min(.94,(e.clientX-r.left)/r.width));drawCat()};
+  a.addEventListener('pointerdown',follow);
+  a.addEventListener('pointermove',follow);
+  pickTarget(ctc);
+  drawCat();
+  spawnFalling();
+  gTimers.push(setInterval(stepCatch,33));
+}
+function drawCat(){const c=$('catcher');if(c)c.style.left=(ctc.x*100)+'%'}
+function spawnFalling(){
+  const a=$('arena');if(!a)return;
+  const w=spawnWord(ctc);
+  const el=document.createElement('span');
+  el.className='fallstar';el.innerHTML=zyw(w);
+  const x=.12+Math.random()*.76;
+  el.style.left=(x*100)+'%';
+  a.appendChild(el);
+  ctc.items.push({w,el,x,y:-90});
+}
+function catchItem(it){
+  it.el.remove();
+  ctc.items=ctc.items.filter(q=>q!==it);
+  if(it.w===ctc.target){
+    beep(true);ctc.hits++;
+    $('gcount').textContent=countText(ctc.hits);
+    if(ctc.hits>=GAME_GOAL){gameWin('catch',3,'全部接到了！');return}
+    pickTarget(ctc);
+  }else beep(false);
+}
+function stepCatch(){
+  const a=$('arena');if(!a||!ctc)return;
+  ctc.tick++;
+  const h=a.clientHeight;
+  ctc.items.slice().forEach(it=>{
+    it.y+=1.3;
+    it.el.style.transform='translate(-50%,'+it.y+'px)';
+    if(it.y>h-150&&Math.abs(it.x-ctc.x)<.17){catchItem(it);return}
+    if(it.y>h){it.el.remove();ctc.items=ctc.items.filter(q=>q!==it)}
+  });
+  if(ctc.tick%85===0&&ctc.items.length<4)spawnFalling();
+  if(!ctc.items.some(it=>it.w===ctc.target)&&ctc.tick%20===0)spawnFalling();
+}
+// 我的小花園：答對就挑一張貼紙，自己決定放在哪裡。
+const STICKERS=['🌷','🌻','🌸','🦋','🐰','🐱','🐣','🍄','🌈','🏠','⭐','🎀','🧁','🐝','🐞','🌳','🪁','🐶'];
+let gd=null;
+const loadGarden=()=>{try{const v=JSON.parse(store.get('garden')||'[]');return Array.isArray(v)?v:[]}catch(e){return []}};
+function drawGarden(){
+  const g=$('garden');if(!g)return;
+  g.innerHTML=gd.list.map(s=>'<span class="sticker" aria-hidden="true" style="left:'+s.x+'%;top:'+s.y+'%">'+s.e+'</span>').join('');
+}
+function startGarden(){
+  stopGame();
+  gd={list:loadGarden(),w:null,sticker:null,placed:0};
+  $('main').innerHTML=gameTop('我的小花園')+'<div class="garden" id="garden" role="img" aria-label="花園"></div><div id="gstep"></div><button class="gback" type="button" data-greset="1">重新布置</button>';
+  $('garden').addEventListener('click',placeSticker);
+  drawGarden();
+  gardenQuestion();
+}
+function gardenQuestion(){
+  gd.sticker=null;
+  const voc=lessonVoc();
+  const w=take(voc.filter(v=>v!==gd.w),1)[0];gd.w=w;
+  const opts=shuffle([w,...take(voc.filter(v=>v!==w),2)]);
+  gd.opts=opts;
+  $('gstep').innerHTML='<div class="ask slim gardenask">'+gamePrompt(w)+'</div><p class="hint" id="hint"></p><div class="opts three">'+opts.map((o,n)=>'<button class="cell" type="button" data-gq="'+n+'">'+zyw(o)+'</button>').join('')+'</div>';
+}
+function gardenPick(){
+  $('gstep').innerHTML='<p class="say ok">答對了！挑一張貼紙。</p><div class="opts three">'+take(STICKERS,3).map(e=>'<button class="cell emoji" type="button" data-gs="'+e+'">'+e+'</button>').join('')+'</div>';
+}
+function placeSticker(e){
+  if(!gd||!gd.sticker)return;
+  const r=e.currentTarget.getBoundingClientRect();
+  gd.list.push({e:gd.sticker,x:Math.round((e.clientX-r.left)/r.width*100),y:Math.round((e.clientY-r.top)/r.height*100)});
+  if(gd.list.length>40)gd.list.shift();
+  store.set('garden',JSON.stringify(gd.list));
+  drawGarden();beep(true);
+  gd.placed++;
+  if(gd.placed%5===0){addStars(1)}
+  gardenQuestion();
+}
 function renderModes(){}
 const PAGES={
   home:{h:'小一注音練習',lead:'先練注音，再玩遊戲。',key:'先從第一課開始練。'},
@@ -629,8 +803,21 @@ $('main').addEventListener('click',e=>{
   if(b.dataset.kexit){liveLobby();return}
   if(b.dataset.k!==undefined){liveAnswer(Number(b.dataset.k));return}
   if(b.dataset.knext){if(live.i===live.qs.length-1){sheetEl().classList.remove('playing');liveEnd()}else{live.i++;liveQuestion();$('main').scrollIntoView({block:'start'})}return}
+  if(b.dataset.bub!==undefined){shootBubble(b);return}
+  if(b.dataset.move!==undefined){ctc.x=Math.max(.06,Math.min(.94,ctc.x+Number(b.dataset.move)*.16));drawCat();return}
+  if(b.dataset.gq!==undefined){
+    if(gd.opts[Number(b.dataset.gq)]===gd.w){beep(true);gardenPick()}
+    else{beep(false);b.classList.add('bad');b.disabled=true}
+    return;
+  }
+  if(b.dataset.gs!==undefined){
+    gd.sticker=b.dataset.gs;
+    $('gstep').innerHTML='<p class="say ok">點花園，把 '+gd.sticker+' 放上去。</p>';
+    return;
+  }
+  if(b.dataset.greset){gd.list=[];store.set('garden','[]');drawGarden();return}
   if(b.dataset.gback){gameMenu();return}
-  if(b.dataset.game){({memory:startMemory,mole:startMole,race:startRace})[b.dataset.game]();return}
+  if(b.dataset.game){document.body.classList.add('playing');window.scrollTo(0,0);({memory:startMemory,mole:startMole,race:startRace,bubble:startBubble,catch:startCatch,garden:startGarden})[b.dataset.game]();return}
   if(b.dataset.card!==undefined){flipCard(b);return}
   if(b.dataset.hole!==undefined){hitMole(b);return}
   if(b.dataset.race!==undefined){answerRace(b);return}
