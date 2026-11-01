@@ -170,8 +170,8 @@ main{padding:16px 18px 22px}
   .tabs{display:flex;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px}
   .tab{flex:0 0 112px;min-height:62px;font-size:15px;white-space:nowrap}
   .tab:last-child{flex-basis:140px}
-  .modes{gap:4px}
-  .mode{white-space:nowrap;font-size:14px;padding:0}
+  header .modes{grid-template-columns:1.5fr 1fr 1fr;gap:4px}
+  header .mode{white-space:nowrap;font-size:14px;padding:0}
   .klobby .decor{display:none}
   .mode .rc.zc .zy{padding-inline:.05em .35em}
   .banpics{font-size:20px}.banname{font-size:17px}
@@ -494,6 +494,11 @@ function renderTabs(){
   $('tabs').innerHTML=LESSONS.map(l=>{
     return '<button class="tab" type="button" data-id="'+l.id+'" aria-pressed="'+(l===lesson)+'"><span class="tabpic" aria-hidden="true">'+THEMES[l.id].icon+'</span>'+l.name+'</button>';
   }).join('');
+  showActiveTab();
+}
+function showActiveTab(){
+  const box=$('tabs'),t=box.querySelector('[aria-pressed="true"]');
+  if(t)box.scrollLeft=t.offsetLeft-box.offsetLeft-(box.clientWidth-t.offsetWidth)/2;
 }
 function renderProg(){
   $('prog').innerHTML=qs.map((q,n)=>'<i class="'+(n<i?(q.missed?'miss':'on'):n===i?'now':'')+'"></i>').join('');
