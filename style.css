@@ -157,7 +157,6 @@ h2 { margin: 20px 0 12px; font-size: 46px; line-height: 1.4; }
 .cell { position: relative; min-width: 0; min-height: 124px; display: flex; align-items: center; justify-content: center; padding: 10px 6px; background: var(--surface); border: 2px solid var(--line); border-radius: 12px; font-family: var(--kai); font-size: 60px; line-height: 1.05; }
 button.cell:hover:not(:disabled) { border-color: var(--accent); }
 .cell:disabled { cursor: default; }
-.cell.solo { width: 136px; min-height: 136px; font-size: 76px; }
 .cell.emoji { font-family: var(--emoji); font-size: 60px; }
 .cell.tone { font-size: 34px; min-height: 88px; gap: 6px; }
 .cell.tone b { font-size: 40px; font-weight: 400; }

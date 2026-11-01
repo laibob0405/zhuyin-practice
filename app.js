@@ -88,10 +88,8 @@ function annotate(root){
     n.replaceWith(span);
   });
 }
-const SECTIONS={listen:'聽一聽，選符號',classify:'這是哪一類符號？',pick:'看圖，選注音',zypic:'看注音，選圖',spell:'拼一拼',tone:'選聲調',match:'連連看',combine:'拼音練習',missing:'看圖填語詞',linkword:'連成語詞',pair:'把對的音選出來',circle:'圈一圈',fill:'選詞填句子',order:'把句子排好',listenS:'聽句子，選圖',tf:'圖和句子一樣嗎？',reading:'讀短文，回答問題'};
+const SECTIONS={listen:'聽一聽，選符號',pick:'看圖，選注音',zypic:'看注音，選圖',spell:'拼一拼',tone:'選聲調',match:'連連看',combine:'拼音練習',missing:'看圖填語詞',linkword:'連成語詞',pair:'把對的音選出來',circle:'圈一圈',fill:'選詞填句子',order:'把句子排好',listenS:'聽句子，選圖',tf:'圖和句子一樣嗎？',reading:'讀短文，回答問題'};
 const NUM=['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七'];
-const CLASSES=['聲符','介符','韻符','結合韻'];
-const classOf=s=>[...s].length>1?'結合韻':'ㄧㄨㄩ'.includes(s)?'介符':'ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ'.includes(s)?'韻符':'聲符';
 const txt=ch=>ch.map(t=>t.c).join('');
 const sentText=s=>s.ch.map(txt).join('')+'。';
 const ru=ch=>'<span class="ru">'+ch.map(t=>'<span class="rc" role="img" aria-label="'+t.c+'">'+zy(t)+'</span>').join('')+'</span>';
@@ -120,8 +118,6 @@ function build(l){
   const qs=[];
   const pics=l.sents.map(s=>s.p);
   take(l.sym.filter(x=>x[1]),2).forEach(([s,r])=>qs.push({type:'listen',s,read:r,opts:shuffle([s,...take(l.sym.map(x=>x[0]).filter(x=>x!==s),3)]),answer:s,label:'聽音選符號'}));
-  const byClass=shuffle(CLASSES).map(c=>l.pool.map(x=>x[0]).filter(s=>classOf(s)===c)).filter(a=>a.length);
-  byClass.slice(0,2).map(a=>take(a,1)[0]).forEach(s=>qs.push({type:'classify',s,good:CLASSES.indexOf(classOf(s)),label:'「'+s+'」的類別',ans:classOf(s),say:s+'是'+classOf(s)+'。'}));
   take(voc,2).forEach(w=>qs.push({type:'pick',w,opts:shuffle([w,...vOthers(w,3)]),label:'看圖「'+w.c+'」選注音',ans:w.c}));
   take(voc,2).forEach(w=>{const opts=shuffle([w,...vOthers(w,3)]);qs.push({type:'zypic',w,opts,good:opts.indexOf(w),label:'看注音選「'+w.c+'」',ans:w.c,say:'答對了！這是「'+w.c+'」。'})});
   take(voc.filter(w=>[...w.s].length>1&&w.ch.length<4),2).forEach(w=>{
@@ -146,7 +142,7 @@ function build(l){
   const twos=voc.filter(w=>w.ch.length===2);
   const toks=[];voc.forEach(w=>w.ch.forEach(t=>{if(!toks.some(u=>u.s===t.s&&u.t===t.t))toks.push({...t})}));
   const taught=new Set(l.pool.flatMap(x=>[...x[0]]));
-  // 拼音練習：聲符加韻符，選出拼好的音。
+  // 拼音練習：前後兩部分合起來，選出拼好的音。
   take(toks.filter(t=>[...t.s].length>1&&t.t<5),1).forEach(t=>{
     const cs=[...t.s],otherTone={s:t.s,t:t.t%4+1};
     const opts=shuffle([t,otherTone,...take(toks.filter(u=>u.s!==t.s&&[...u.s].length>1),2)]);
@@ -234,8 +230,6 @@ function renderQ(){
     body='<div class="ask">'+speakBtn(q.read,'聽聲音')+'</div><p class="hint" id="hint"></p><div class="opts four">'+q.opts.map(o=>'<button class="cell" type="button" data-opt="'+o+'">'+o+'</button>').join('')+'</div>';
   }else if(q.type==='pick'){
     body='<div class="ask"><span class="pic" role="img" aria-label="'+q.w.c+'">'+q.w.p+'</span>'+speakBtn(q.w.c,'念給我聽')+'</div><p class="hint" id="hint"></p><div class="opts four">'+q.opts.map(o=>'<button class="cell" type="button" data-opt="'+key(o)+'">'+zyw(o)+'</button>').join('')+'</div>';
-  }else if(q.type==='classify'){
-    body='<div class="ask"><span class="cell solo">'+q.s+'</span></div><div class="opts four">'+CLASSES.map((c,n)=>'<button class="cell tone" type="button" data-ans="'+n+'">'+c+'</button>').join('')+'</div>';
   }else if(q.type==='zypic'){
     body='<div class="ask"><span class="word big">'+zyw(q.w)+'</span></div><div class="opts four">'+q.opts.map((o,n)=>'<button class="cell emoji" type="button" data-ans="'+n+'" aria-label="第 '+(n+1)+' 張圖">'+o.p+'</button>').join('')+'</div>';
   }else if(q.type==='match'){
