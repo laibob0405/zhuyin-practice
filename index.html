@@ -766,14 +766,14 @@ const sheetEl=()=>document.querySelector('.sheet');
 const THEMES={
  '1':{img:'images/lesson1.jpg',bg:'#a33a1f',icon:'🐱',pics:['🐱','🏃','🏅','🎽','🌼','🏁','🦀','🐈‍⬛']},
  '2':{img:'images/lesson2.jpg',bg:'#1f6b4a',icon:'🐣',pics:['🐣','🦢','🥚','🐤','🕸️','🐸','🌿','🐥']},
- '3':{bg:'#135f8f',icon:'🦫',pics:['🦛','🦫','🐟','🪵','🌊','🌲','💧','🐠']},
- '4':{bg:'#8a4a12',icon:'🎒',pics:['🎒','🏫','🦒','🦌','🍂','🌳','🐰','🐦']},
- '5':{bg:'#3f7a1e',icon:'🛝',pics:['🛝','🐭','🐰','⚽','🍄','🐱','☁️','🌼']},
- '6':{bg:'#a02c6b',icon:'🌷',pics:['🌷','🧑‍🏫','🎨','🙏','🐸','🍄','🍃','🐵']},
- '7':{bg:'#2f6d2b',icon:'🐢',pics:['🐢','🐰','🏁','💤','🎵','🐌','🌺','🌳']},
- '8':{bg:'#8c5a14',icon:'🥕',pics:['🥕','🐘','🐂','🐰','🐱','☀️','🐛','🌱']},
- '9':{bg:'#5a2a96',icon:'🎉',pics:['🎉','🦚','🐸','🥁','🦁','🌙','⭐','🐻']},
- 'all':{bg:'#2b1a5a',icon:'🏆',pics:['🏆','🐱','🐣','🦫','🎒','🐢','🥕','🎉']}
+ '3':{img:'images/lesson3.jpg',bg:'#135f8f',icon:'🦫',pics:['🦛','🦫','🐟','🪵','🌊','🌲','💧','🐠']},
+ '4':{img:'images/lesson4.jpg',bg:'#8a4a12',icon:'🎒',pics:['🎒','🏫','🦒','🦌','🍂','🌳','🐰','🐦']},
+ '5':{img:'images/lesson5.jpg',bg:'#3f7a1e',icon:'🛝',pics:['🛝','🐭','🐰','⚽','🍄','🐱','☁️','🌼']},
+ '6':{img:'images/lesson6.jpg',bg:'#a02c6b',icon:'🌷',pics:['🌷','🧑‍🏫','🎨','🙏','🐸','🍄','🍃','🐵']},
+ '7':{img:'images/lesson7.jpg',bg:'#2f6d2b',icon:'🐢',pics:['🐢','🐰','🏁','💤','🎵','🐌','🌺','🌳']},
+ '8':{img:'images/lesson8.jpg',bg:'#8c5a14',icon:'🥕',pics:['🥕','🐘','🐂','🐰','🐱','☀️','🐛','🌱']},
+ '9':{img:'images/lesson9.jpg',bg:'#5a2a96',icon:'🎉',pics:['🎉','🦚','🐸','🥁','🦁','🌙','⭐','🐻']},
+ 'all':{img:'images/lessonall.jpg',bg:'#2b1a5a',icon:'🏆',pics:['🏆','🐱','🐣','🦫','🎒','🐢','🥕','🎉']}
 };
 const themeOf=()=>THEMES[lesson.id];
 const sceneHtml=()=>themeOf().img?'<img class="sceneimg" src="'+themeOf().img+'" alt="">':'<div class="scene" aria-hidden="true">'+themeOf().pics.slice(0,5).map(p=>'<span>'+p+'</span>').join('')+'</div>';
