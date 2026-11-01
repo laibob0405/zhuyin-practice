@@ -265,6 +265,103 @@ footer{border-top:1px solid var(--line);padding:12px 20px;font-size:13px;color:v
   .opts.four{grid-template-columns:repeat(2,minmax(0,1fr))}.pic{font-size:64px}
   .opts.three{grid-template-columns:minmax(0,1fr)}.ru{font-size:30px}.cell.chunk{min-height:72px}
 }
+
+/* 字級：國字為主，注音約為國字一半且不小於 13px，都排在國字右側 */
+.sheet .rc.zc{gap:.04em;margin-inline-end:.08em}
+.sheet .rc.zc .zy{font-size:max(.52em,13px);line-height:1.08;padding-inline:.08em .5em}
+.sheet .rz{line-height:1.85}
+.sheet h1{font-size:32px;line-height:1.5}
+.sheet .name{font-size:19px}
+.sheet .mode{font-size:21px;min-height:58px}
+.sheet .tab{font-size:19px;min-height:78px}
+.sheet .banname{font-size:24px}
+.sheet .banner small{font-size:17px}
+.sheet .mixrow{font-size:17px}
+.sheet .sec{font-size:27px;line-height:1.6}
+.sheet .count{font-size:17px}
+.sheet .say{font-size:25px;line-height:1.7}
+.sheet .hint{font-size:18px}
+.sheet .speak{font-size:21px;min-height:62px}
+.sheet .next,.sheet .knext{font-size:23px;min-height:62px}
+.sheet .review h2{font-size:24px}
+.sheet .review li{font-size:19px;align-items:center}
+.sheet .gamebtn{font-size:27px}
+.sheet .gamebtn small{font-size:19px}
+.sheet .gback,.sheet .kexit{font-size:17px}
+.sheet .starline{font-size:21px}
+.sheet .ru{font-size:42px}
+.sheet .stop{font-size:36px}
+.sheet .sent{gap:8px 14px}
+.sheet .passage{gap:12px;padding:16px 18px}
+/* 答案選項只有注音，放大到一眼看清楚 */
+.sheet .cell{font-size:56px}
+.sheet .cell.tone{font-size:26px}
+.sheet .tiles .cell,.sheet .matchgrid .cell{font-size:46px}
+.sheet .cell.chunk{min-height:104px}
+.sheet .cell.chunk .ru{font-size:46px}
+.sheet .cell.chunk .rc .zy{font-size:.8em}
+.sheet .slot{width:58px;height:58px;font-size:42px}
+.sheet .oslot .rc .zy{font-size:.72em}
+/* 搶答 */
+.sheet .khead{font-size:21px}
+.sheet .kscore{font-size:30px}
+.sheet .kbig{font-size:48px}
+.sheet .kstart{font-size:34px}
+.sheet .kprompt .word{font-size:72px}
+.sheet .kprompt .say{font-size:30px}
+.sheet .kfb .say{font-size:27px}
+.sheet .ktile{font-size:52px;min-height:128px}
+.sheet .duo{font-size:54px}
+.sheet .duo .zy{font-size:.52em}
+.sheet .brow{font-size:23px}
+.sheet .card{font-size:42px}
+.sheet .hole{font-size:46px}
+@media (max-width:480px){
+  .sheet h1{font-size:25px}
+  .sheet .name{font-size:16px}
+  .sheet .rc.zc .zy{font-size:max(.52em,12px);padding-inline:.05em .42em}
+  .sheet header .mode{font-size:15px;min-height:52px}
+  .sheet .tab{font-size:17px;flex-basis:124px;min-height:70px}
+  .sheet .tab:last-child{flex-basis:156px}
+  .sheet .banname{font-size:20px}
+  .sheet .mixrow{font-size:15px}
+  .sheet .sec{font-size:22px}
+  .sheet .count{font-size:15px}
+  .sheet .say{font-size:21px}
+  .sheet .hint{font-size:16px}
+  .sheet .speak{font-size:18px}
+  .sheet .next,.sheet .knext{font-size:20px}
+  .sheet .gamebtn{font-size:23px}
+  .sheet .gamebtn small{font-size:16px}
+  .sheet .ru{font-size:32px}
+  .sheet .stop{font-size:28px}
+  .sheet .cell{font-size:46px}
+  .sheet .cell.tone{font-size:22px}
+  .sheet .tiles .cell,.sheet .matchgrid .cell{font-size:38px}
+  .sheet .cell.chunk .ru{font-size:38px}
+  .sheet .khead{font-size:17px}
+  .sheet .kscore{font-size:24px}
+  .sheet .kbig{font-size:34px}
+  .sheet .kstart{font-size:28px}
+  .sheet .kprompt .word{font-size:56px}
+  .sheet .kprompt .say{font-size:23px}
+  .sheet .kfb .say{font-size:21px}
+  .sheet .ktile{font-size:40px;min-height:104px}
+  .sheet .duo{font-size:40px}
+  .sheet .brow{font-size:19px}
+  .sheet .card{font-size:34px}
+  .sheet .hole{font-size:38px}
+  .sheet .ktile{padding:10px 6px 10px 26px;min-width:0}
+  .sheet .ktile .zyrow{font-size:.74em;flex-wrap:wrap;justify-content:center;gap:0 2px}
+  .sheet .ktile .zyrow.long{font-size:.52em}
+  .sheet header .modes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sheet header .mode{font-size:18px;min-width:0}
+  .sheet header .mode:first-child{grid-column:1/-1}
+  .sheet .banimg{max-height:96px}
+  .sheet .banpics{display:none}
+  .sheet .banner{padding:6px 10px;gap:4px 10px}
+}
+.sheet .ktile .zyrow.long{font-size:.6em}
 </style>
 
 <div class="sheet">
@@ -276,7 +373,7 @@ footer{border-top:1px solid var(--line);padding:12px 20px;font-size:13px;color:v
     <div class="modes" id="modes" role="group" aria-label="模式"><button class="mode" type="button" data-mode="quiz">注音考題</button><button class="mode" type="button" data-mode="live">搶答</button><button class="mode" type="button" data-mode="game">小遊戲</button></div>
     <div class="tabs" id="tabs"></div>
     <div class="banner" id="banner"></div>
-    <label class="mixrow" id="mixrow" for="mix"><input type="checkbox" id="mix"> 混合出題（打亂本課題型順序）</label>
+    <label class="mixrow" id="mixrow" for="mix"><input type="checkbox" id="mix"> 混合出題</label>
   </header>
   <div class="prog" id="prog" aria-hidden="true"></div>
   <main id="main" aria-live="polite"></main>
