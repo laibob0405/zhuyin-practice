@@ -49,7 +49,7 @@ const VOCAB={
 LESSONS.forEach((l,n)=>{l.vocab=VOCAB[l.id];l.sents=SENT[l.id].s;l.reads=[SENT[l.id].r];l.pool=LESSONS.slice(0,n+1).flatMap(x=>x.sym)});
 LESSONS.push({id:'all',name:'期中測驗',sub:'九課混合 36 題',sym:LESSONS.flatMap(l=>l.sym),vocab:LESSONS.flatMap(l=>l.vocab),sents:LESSONS.flatMap(l=>l.sents),reads:LESSONS.flatMap(l=>l.reads),pool:LESSONS.flatMap(l=>l.sym)});
 // 介面文字的注音對照：先比對句子裡的語詞（才能標對輕聲），再查單字。
-const UI_ZY='小ㄒㄧㄠ3一ㄧ1國ㄍㄨㄛ2語ㄩ3互ㄏㄨ4動ㄉㄨㄥ4學ㄒㄩㄝ2習ㄒㄧ2卷ㄐㄩㄢ4姓ㄒㄧㄥ4名ㄇㄧㄥ2年ㄋㄧㄢ2級ㄐㄧ2上ㄕㄤ4期ㄑㄧ2注ㄓㄨ4音ㄧㄣ1符ㄈㄨ2號ㄏㄠ4第ㄉㄧ4到ㄉㄠ4九ㄐㄧㄡ3課ㄎㄜ4對ㄉㄨㄟ4應ㄧㄥ4康ㄎㄤ1軒ㄒㄩㄢ1版ㄅㄢ3進ㄐㄧㄣ4度ㄉㄨ4二ㄦ4三ㄙㄢ1四ㄙ4五ㄨ3六ㄌㄧㄡ4七ㄑㄧ1八ㄅㄚ1十ㄕ2咪ㄇㄧ1鵝ㄜ2寶ㄅㄠ3河ㄏㄜ2馬ㄇㄚ3和ㄏㄢ4狸ㄌㄧ2嘻ㄒㄧ1翹ㄑㄧㄠ4板ㄅㄢ3龜ㄍㄨㄟ1兔ㄊㄨ4賽ㄙㄞ4物ㄨ4狂ㄎㄨㄤ2歡ㄏㄨㄢ1會ㄏㄨㄟ4中ㄓㄨㄥ1測ㄘㄜ4驗ㄧㄢ4混ㄏㄨㄣ4合ㄏㄜ2題ㄊㄧ2最ㄗㄨㄟ4高ㄍㄠ1分ㄈㄣ1出ㄔㄨ1打ㄉㄚ3亂ㄌㄨㄢ4本ㄅㄣ3型ㄒㄧㄥ2順ㄕㄨㄣ4序ㄒㄩ4聽ㄊㄧㄥ1選ㄒㄩㄢ3這ㄓㄜ4是ㄕ4哪ㄋㄚ3類ㄌㄟ4看ㄎㄢ4圖ㄊㄨ2拼ㄆㄧㄣ1聲ㄕㄥ1調ㄉㄧㄠ4連ㄌㄧㄢ2詞ㄘ2填ㄊㄧㄢ2句ㄐㄩ4子ㄗ5把ㄅㄚ3排ㄆㄞ2好ㄏㄠ3樣ㄧㄤ4嗎ㄇㄚ5讀ㄉㄨ2短ㄉㄨㄢ3文ㄨㄣ2回ㄏㄨㄟ2答ㄉㄚ2問ㄨㄣ4共ㄍㄨㄥ4念ㄋㄧㄢ4給ㄍㄟ3我ㄨㄛ3介ㄐㄧㄝ4韻ㄩㄣ4結ㄐㄧㄝ2不ㄅㄨ4先ㄒㄧㄢ1點ㄉㄧㄢ3張ㄓㄤ1再ㄗㄞ4它ㄊㄚ1請ㄑㄧㄥ3想ㄒㄧㄤ3換ㄏㄨㄢ4個ㄍㄜ5試ㄕ4重ㄔㄨㄥ2新ㄒㄧㄣ1了ㄌㄜ5就ㄐㄧㄡ4案ㄢ4全ㄑㄩㄢ2部ㄅㄨ4下ㄒㄧㄚ4成ㄔㄥ2績ㄐㄧ1練ㄌㄧㄢ4次ㄘ4太ㄊㄞ4棒ㄅㄤ4步ㄅㄨ4更ㄍㄥ4熟ㄕㄡ2慢ㄇㄢ4來ㄌㄞ2幾ㄐㄧ3多ㄉㄨㄛ1要ㄧㄠ4複ㄈㄨ4目ㄇㄨ4各ㄍㄜ4數ㄕㄨ4判ㄆㄢ4斷ㄉㄨㄢ4台ㄊㄞ2裝ㄓㄨㄤ1置ㄓ4無ㄨ2法ㄈㄚ3播ㄅㄛ1放ㄈㄤ4家ㄐㄧㄚ1長ㄓㄤ3著ㄓㄜ5誰ㄕㄟ2什ㄕㄣ2麼ㄇㄜ5別ㄅㄧㄝ2的ㄉㄜ5射ㄕㄜ4接ㄐㄧㄝ1住ㄓㄨ4移ㄧ2園ㄩㄢ2挑ㄊㄧㄠ1貼ㄊㄧㄝ1紙ㄓ3布ㄅㄨ4泡ㄆㄠ4找ㄓㄠ3從ㄘㄨㄥ2去ㄑㄩ4快ㄎㄨㄞ4在ㄗㄞ4首ㄕㄡ3頁ㄧㄝ4論ㄌㄨㄣ4記ㄐㄧ4牢ㄌㄠ2越ㄩㄝ4又ㄧㄡ4做ㄗㄨㄛ4每ㄇㄟ3算ㄙㄨㄢ4得ㄉㄜ5考ㄎㄠ3字ㄗ4行ㄏㄤ2搶ㄑㄧㄤ3開ㄎㄞ1始ㄕ3離ㄌㄧ2時ㄕ2間ㄐㄧㄢ1正ㄓㄥ4確ㄑㄩㄝ4錯ㄘㄨㄛ4榜ㄅㄤ3功ㄍㄨㄥ1謝ㄒㄧㄝ4跑ㄆㄠ3圈ㄑㄩㄢ1有ㄧㄡ3很ㄏㄣ3玩ㄨㄢ2面ㄇㄧㄢ4後ㄏㄡ4起ㄑㄧ3都ㄉㄡ1完ㄨㄢ2翻ㄈㄢ1牌ㄆㄞ2配ㄆㄟ4找ㄓㄠ3往ㄨㄤ3前ㄑㄧㄢ2走ㄗㄡ3幫ㄅㄤ1已ㄧ3經ㄐㄧㄥ1隻ㄓ1拿ㄋㄚ2地ㄉㄧ4鼠ㄕㄨ3單ㄉㄢ1贏ㄧㄥ2顆ㄎㄜ1你ㄋㄧ3星ㄒㄧㄥ1戲ㄒㄧ4遊ㄧㄡ2先ㄒㄧㄢ1';
+const UI_ZY='小ㄒㄧㄠ3一ㄧ1國ㄍㄨㄛ2語ㄩ3互ㄏㄨ4動ㄉㄨㄥ4學ㄒㄩㄝ2習ㄒㄧ2卷ㄐㄩㄢ4姓ㄒㄧㄥ4名ㄇㄧㄥ2年ㄋㄧㄢ2級ㄐㄧ2上ㄕㄤ4期ㄑㄧ2注ㄓㄨ4音ㄧㄣ1符ㄈㄨ2號ㄏㄠ4第ㄉㄧ4到ㄉㄠ4九ㄐㄧㄡ3課ㄎㄜ4對ㄉㄨㄟ4應ㄧㄥ4康ㄎㄤ1軒ㄒㄩㄢ1版ㄅㄢ3進ㄐㄧㄣ4度ㄉㄨ4二ㄦ4三ㄙㄢ1四ㄙ4五ㄨ3六ㄌㄧㄡ4七ㄑㄧ1八ㄅㄚ1十ㄕ2咪ㄇㄧ1鵝ㄜ2寶ㄅㄠ3河ㄏㄜ2馬ㄇㄚ3和ㄏㄢ4狸ㄌㄧ2嘻ㄒㄧ1翹ㄑㄧㄠ4板ㄅㄢ3龜ㄍㄨㄟ1兔ㄊㄨ4賽ㄙㄞ4物ㄨ4狂ㄎㄨㄤ2歡ㄏㄨㄢ1會ㄏㄨㄟ4中ㄓㄨㄥ1測ㄘㄜ4驗ㄧㄢ4混ㄏㄨㄣ4合ㄏㄜ2題ㄊㄧ2最ㄗㄨㄟ4高ㄍㄠ1分ㄈㄣ1出ㄔㄨ1打ㄉㄚ3亂ㄌㄨㄢ4本ㄅㄣ3型ㄒㄧㄥ2順ㄕㄨㄣ4序ㄒㄩ4聽ㄊㄧㄥ1選ㄒㄩㄢ3這ㄓㄜ4是ㄕ4哪ㄋㄚ3類ㄌㄟ4看ㄎㄢ4圖ㄊㄨ2拼ㄆㄧㄣ1聲ㄕㄥ1調ㄉㄧㄠ4連ㄌㄧㄢ2詞ㄘ2填ㄊㄧㄢ2句ㄐㄩ4子ㄗ5把ㄅㄚ3排ㄆㄞ2好ㄏㄠ3樣ㄧㄤ4嗎ㄇㄚ5讀ㄉㄨ2短ㄉㄨㄢ3文ㄨㄣ2回ㄏㄨㄟ2答ㄉㄚ2問ㄨㄣ4共ㄍㄨㄥ4念ㄋㄧㄢ4給ㄍㄟ3我ㄨㄛ3介ㄐㄧㄝ4韻ㄩㄣ4結ㄐㄧㄝ2不ㄅㄨ4先ㄒㄧㄢ1點ㄉㄧㄢ3張ㄓㄤ1再ㄗㄞ4它ㄊㄚ1請ㄑㄧㄥ3想ㄒㄧㄤ3換ㄏㄨㄢ4個ㄍㄜ5試ㄕ4重ㄔㄨㄥ2新ㄒㄧㄣ1了ㄌㄜ5就ㄐㄧㄡ4案ㄢ4全ㄑㄩㄢ2部ㄅㄨ4下ㄒㄧㄚ4成ㄔㄥ2績ㄐㄧ1練ㄌㄧㄢ4次ㄘ4太ㄊㄞ4棒ㄅㄤ4步ㄅㄨ4更ㄍㄥ4熟ㄕㄡ2慢ㄇㄢ4來ㄌㄞ2幾ㄐㄧ3多ㄉㄨㄛ1要ㄧㄠ4複ㄈㄨ4目ㄇㄨ4各ㄍㄜ4數ㄕㄨ4判ㄆㄢ4斷ㄉㄨㄢ4台ㄊㄞ2裝ㄓㄨㄤ1置ㄓ4無ㄨ2法ㄈㄚ3播ㄅㄛ1放ㄈㄤ4家ㄐㄧㄚ1長ㄓㄤ3著ㄓㄜ5誰ㄕㄟ2什ㄕㄣ2麼ㄇㄜ5別ㄅㄧㄝ2的ㄉㄜ5程ㄔㄥ2還ㄏㄞ2沒ㄇㄟ2名ㄇㄧㄥ2射ㄕㄜ4接ㄐㄧㄝ1住ㄓㄨ4移ㄧ2園ㄩㄢ2挑ㄊㄧㄠ1貼ㄊㄧㄝ1紙ㄓ3布ㄅㄨ4泡ㄆㄠ4找ㄓㄠ3從ㄘㄨㄥ2去ㄑㄩ4快ㄎㄨㄞ4在ㄗㄞ4首ㄕㄡ3頁ㄧㄝ4論ㄌㄨㄣ4記ㄐㄧ4牢ㄌㄠ2越ㄩㄝ4又ㄧㄡ4做ㄗㄨㄛ4每ㄇㄟ3算ㄙㄨㄢ4得ㄉㄜ5考ㄎㄠ3字ㄗ4行ㄏㄤ2搶ㄑㄧㄤ3開ㄎㄞ1始ㄕ3離ㄌㄧ2時ㄕ2間ㄐㄧㄢ1正ㄓㄥ4確ㄑㄩㄝ4錯ㄘㄨㄛ4榜ㄅㄤ3功ㄍㄨㄥ1謝ㄒㄧㄝ4跑ㄆㄠ3圈ㄑㄩㄢ1有ㄧㄡ3很ㄏㄣ3玩ㄨㄢ2面ㄇㄧㄢ4後ㄏㄡ4起ㄑㄧ3都ㄉㄡ1完ㄨㄢ2翻ㄈㄢ1牌ㄆㄞ2配ㄆㄟ4找ㄓㄠ3往ㄨㄤ3前ㄑㄧㄢ2走ㄗㄡ3幫ㄅㄤ1已ㄧ3經ㄐㄧㄥ1隻ㄓ1拿ㄋㄚ2地ㄉㄧ4鼠ㄕㄨ3單ㄉㄢ1贏ㄧㄥ2顆ㄎㄜ1你ㄋㄧ3星ㄒㄧㄥ1戲ㄒㄧ4遊ㄧㄡ2先ㄒㄧㄢ1';
 const ZY_WORD=new Map(),ZY_ONE=new Map();
 T(UI_ZY).forEach(t=>ZY_ONE.set(t.c,t));
 T('做ㄗㄨㄛ4得ㄉㄜ5很ㄏㄣ3好ㄏㄠ3').forEach((t,n,a)=>{if(n===0)ZY_WORD.set('做得',a.slice(0,2))});
@@ -205,12 +205,7 @@ function say(text){
     speechSynthesis.speak(u);
   }catch(e){show()}
 }
-function renderTabs(){
-  applyTheme();
-  const list=page==='quiz'?LESSONS.filter(l=>l.id!=='all'):LESSONS;
-  $('tabs').innerHTML=list.map(l=>'<button class="tab" type="button" data-id="'+l.id+'" aria-pressed="'+(l===lesson)+'"><img src="'+THEMES[l.id].img+'" alt="" loading="lazy"><span>'+(l.id==='all'?'九課混合':l.name)+'</span></button>').join('');
-  $('picktoggle').textContent='選課：'+(lesson.id==='all'?'九課混合':lesson.name);
-}
+function renderTabs(){applyTheme();updateStars()}
 function renderProg(){
   $('prog').innerHTML=qs.map((q,n)=>'<i class="'+(n<i?(q.missed?'miss':'on'):n===i?'now':'')+'"></i>').join('');
 }
@@ -290,12 +285,11 @@ function result(){
    (wrong.length?'<div class="review"><h2>要再複習的題目</h2><ul>'+wrong.map(q=>'<li><span>'+(q.from?q.from.name+'．':'')+q.label+'</span><span>'+ans(q)+'</span></li>').join('')+'</ul></div>':'')+
    '<button class="next" style="margin:0" type="button" id="again">再練一次</button></div>';
 }
-$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)start(LESSONS.find(l=>l.id===b.dataset.id))});
 $('main').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b||b.disabled)return;
   if(b.dataset.say){say(b.dataset.say);return}
   if(b.id==='next'){if(i===qs.length-1)result();else{i++;renderQ();$('prog').scrollIntoView({block:'start'})}return}
-  if(b.id==='again'){start(lesson);return}
+  if(b.id==='again'){start(lesson);window.scrollTo(0,0);return}
   const q=qs[i];
   if(b.dataset.ll!==undefined){
     document.querySelectorAll('[data-ll]').forEach(x=>x.classList.remove('sel'));
@@ -369,7 +363,8 @@ if('speechSynthesis' in window)speechSynthesis.getVoices();
 let gTimers=[];
 function stopGame(){gTimers.forEach(t=>{clearInterval(t);clearTimeout(t)});gTimers=[]}
 const getStars=()=>Number(store.get('stars'))||0;
-function addStars(n){store.set('stars',String(getStars()+n))}
+function addStars(n){store.set('stars',String(getStars()+n));updateStars()}
+function updateStars(){const s=$('starcount');if(s)s.textContent='⭐ '+getStars()}
 function beep(ok){
   try{
     const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
@@ -496,13 +491,7 @@ const themeOf=()=>THEMES[lesson.id];
 const sceneHtml=()=>themeOf().img?'<img class="sceneimg" src="'+themeOf().img+'" alt="">':'<div class="scene" aria-hidden="true">'+themeOf().pics.slice(0,5).map(p=>'<span>'+p+'</span>').join('')+'</div>';
 const SLOTS=[[2,17],[92,17],[2,46],[92,42],[5,88],[89,86],[28,94],[62,94]];
 const decorHtml=()=>'<div class="decor" aria-hidden="true">'+themeOf().pics.map((p,n)=>'<span style="left:'+SLOTS[n][0]+'%;top:'+SLOTS[n][1]+'%">'+p+'</span>').join('')+'</div>';
-function applyTheme(){
-  document.body.style.setProperty('--k-bg',themeOf().bg);
-  const best=store.get('best-'+lesson.id);
-  const head=$('lessonhead');
-  head.hidden=page==='home';
-  head.innerHTML=page==='home'?'':'<div class="lessonhead"><h2>'+(lesson.id==='all'?'九課混合':lesson.name+' '+lesson.sub)+'</h2>'+(best!==null&&page!=='game'?'<small>最高 '+best+' 分</small>':'')+'</div><img class="lessonfig" src="'+themeOf().img+'" alt="">';
-}
+function applyTheme(){document.body.style.setProperty('--k-bg',themeOf().bg)}
 function burst(){
   const stage=document.querySelector('.stage');if(!stage)return;
   const b=document.createElement('div');b.className='burst';b.setAttribute('aria-hidden','true');
@@ -753,50 +742,51 @@ function placeSticker(e){
   gardenQuestion();
 }
 function renderModes(){}
-const PAGES={
-  home:{h:'小一注音練習',lead:'先練注音，再玩遊戲。',key:'先從第一課開始練。'},
-  quiz:{h:'注音考題',lead:'選一課，一題一題慢慢做。',key:'先看圖、聽聲音，再選答案。'},
-  live:{h:'注音搶答',lead:'看誰答得又快又對。',key:'答得越快，分數越高。'},
-  game:{h:'注音小遊戲',lead:'玩一玩，把注音記牢。',key:'遊戲分數不算考試成績。'},
-  exam:{h:'期中測驗',lead:'九課混在一起考。',key:'共三十六題，做完看成績。'}
-};
-const STEPS=[
-  {href:'quiz',img:'images/lesson1.jpg',h:'注音考題',p:'一題一題慢慢練。'},
-  {href:'live',img:'images/lesson7.jpg',h:'注音搶答',p:'答得越快，分數越高。'},
-  {href:'game',img:'images/lesson5.jpg',h:'注音小遊戲',p:'玩一玩，把注音記牢。'},
-  {href:'exam',img:'images/lesson9.jpg',h:'期中測驗',p:'九課混在一起考。'}
+const ACTS=[
+  {act:'quiz',icon:'📝',h:'注音考題',p:'一題一題慢慢做。',first:true},
+  {act:'live',icon:'⏱️',h:'注音搶答',p:'答得越快，分數越高。'},
+  {act:'game',icon:'🎮',h:'注音小遊戲',p:'玩一玩，把注音記牢。'}
 ];
+const lessonLabel=l=>l.id==='all'?'期中測驗':l.name+' '+l.sub;
+function showView(id){['homeview','lessonview','playview'].forEach(v=>{$(v).hidden=v!==id})}
+function renderHome(){
+  const cards=LESSONS.map(l=>{
+    const best=store.get('best-'+l.id);
+    const href=l.id==='all'?'#exam':'#lesson/'+l.id;
+    return '<li'+(l.id==='all'?' class="examcard"':'')+'><a href="'+href+'"><img src="'+THEMES[l.id].img+'" alt="" loading="lazy"><span class="ltext"><span class="lname">'+(l.id==='all'?'期中測驗':l.name)+'</span><span class="lsub">'+(l.id==='all'?'九課混在一起考':l.sub)+'</span><span class="lbest">'+(best!==null?'最高 '+best+' 分':'還沒做')+'</span></span></a></li>';
+  });
+  $('lessongrid').innerHTML=cards.join('');
+}
+function renderLesson(){
+  $('lessonimg').src=themeOf().img;
+  $('lessontitle').textContent=lessonLabel(lesson);
+  $('actlist').innerHTML=ACTS.map(a=>'<li'+(a.first?' class="first"':'')+'><a href="#lesson/'+lesson.id+'/'+a.act+'"><span class="acticon" aria-hidden="true">'+a.icon+'</span><span class="acttext"><span class="actname">'+a.h+'</span><span class="actsub">'+a.p+'</span></span>'+(a.first?'<span class="badge">先做這個</span>':'')+'</a></li>').join('');
+}
 function route(){
-  const name=location.hash.slice(1);
-  page=PAGES[name]?name:'home';
   stopGame();document.body.classList.remove('playing');
-  document.querySelectorAll('[data-page]').forEach(a=>{if(a.dataset.page===page)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-  document.querySelector('nav').classList.remove('open');
-  document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');
-  const p=PAGES[page];
-  $('pagehead').innerHTML='<h1>'+p.h+'</h1><p class="lead">'+p.lead+'</p><div class="key"><span class="label">結論</span><p>'+p.key+'</p></div>';
-  $('picker').hidden=page==='home'||page==='exam';
-  $('picker').classList.remove('open');
-  if(page==='home'){
-    $('lessonhead').hidden=true;$('lessonhead').innerHTML='';$('prog').innerHTML='';
-    $('main').innerHTML='<div><a class="cta" href="#quiz">先去做注音考題</a></div><ol class="cards">'+STEPS.map(s=>'<li><a href="#'+s.href+'"><img src="'+s.img+'" alt="" loading="lazy"><h3>'+s.h+'</h3><p>'+s.p+'</p></a></li>').join('')+'</ol>';
+  const parts=location.hash.slice(1).split('/');
+  const found=LESSONS.find(l=>l.id===parts[1]&&l.id!=='all');
+  updateStars();
+  if(parts[0]==='exam'){
+    page='exam';mode='quiz';showView('playview');
+    $('playback').href='#home';$('playback').textContent='← 全部課程';
+    $('playtitle').textContent='期中測驗';
+    start(LESSONS.find(l=>l.id==='all'));
     return;
   }
-  if(page==='exam'){mode='quiz';start(LESSONS.find(l=>l.id==='all'));return}
-  mode=page;
-  start(page==='quiz'&&lesson.id==='all'?LESSONS[0]:lesson);
+  if(parts[0]==='lesson'&&found){
+    lesson=found;applyTheme();
+    const act=ACTS.find(a=>a.act===parts[2]);
+    if(!act){page='lesson';showView('lessonview');renderLesson();return}
+    page=act.act;mode=act.act;showView('playview');
+    $('playback').href='#lesson/'+lesson.id;$('playback').textContent='← '+lesson.name;
+    $('playtitle').textContent=act.h;
+    start(lesson);
+    return;
+  }
+  page='home';showView('homeview');renderHome();
 }
 window.addEventListener('hashchange',()=>{route();window.scrollTo(0,0)});
-{
-  const nav=document.querySelector('nav'),toggle=nav.querySelector('.menu-toggle');
-  nav.classList.add('collapsible');
-  toggle.addEventListener('click',()=>{toggle.setAttribute('aria-expanded',String(nav.classList.toggle('open')))});
-  nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}});
-  const picker=$('picker'),pt=$('picktoggle');
-  picker.classList.add('collapsible');
-  pt.addEventListener('click',()=>{pt.setAttribute('aria-expanded',String(picker.classList.toggle('open')))});
-  $('tabs').addEventListener('click',e=>{if(e.target.closest('.tab')){picker.classList.remove('open');pt.setAttribute('aria-expanded','false');$('lessonhead').scrollIntoView({block:'start'})}});
-}
 $('main').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b||b.disabled)return;
   if(b.dataset.kstart){liveStart();return}

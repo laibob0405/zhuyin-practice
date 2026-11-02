@@ -20,45 +20,52 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap">
-  <link rel="stylesheet" href="style.css?v=4">
-  <script src="app.js?v=4" defer></script>
+  <link rel="stylesheet" href="style.css?v=5">
+  <script src="app.js?v=5" defer></script>
 </head>
 <body>
   <div class="app">
-    <div class="wrap banner"><img src="images/hero.jpg" width="1456" height="813" alt="兩個小女孩坐在窗邊的地毯上一起看書，身邊有小貓、小鵝、小河狸、小烏龜和小兔子" fetchpriority="high"></div>
-    <header>
-      <div class="wrap">
-        <nav aria-label="主選單">
-          <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="main-menu"><svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><span id="menu-label">選單</span></button>
-          <ul id="main-menu">
-            <li><a href="#home" data-page="home">首頁</a></li>
-            <li><a href="#quiz" data-page="quiz">注音考題</a></li>
-            <li><a href="#live" data-page="live">搶答</a></li>
-            <li><a href="#game" data-page="game">小遊戲</a></li>
-            <li><a href="#exam" data-page="exam">期中測驗</a></li>
-          </ul>
-        </nav>
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <a class="brand" href="#home"><img src="favicon.svg" width="40" height="40" alt=""><span>小一注音練習</span></a>
+        <span class="starcount" id="starcount" aria-live="polite">⭐ 0</span>
       </div>
     </header>
     <main class="wrap">
       <noscript><p>這個網頁的題目需要開啟 JavaScript 才能作答。</p></noscript>
-      <div id="pagehead"></div>
-      <div class="picker" id="picker" hidden>
-        <button type="button" class="pick-toggle" id="picktoggle" aria-expanded="false" aria-controls="tabs"></button>
-        <div class="tabs" id="tabs"></div>
-        <div class="pick-row">
-          <label class="name" for="name"><span>姓名</span> <input id="name" autocomplete="off" maxlength="10"></label>
+
+      <section id="homeview" hidden>
+        <img class="hero" src="images/hero.jpg" width="1456" height="813" alt="兩個小女孩坐在窗邊的地毯上一起看書，身邊有小貓、小鵝、小河狸、小烏龜和小兔子" fetchpriority="high">
+        <h1>小一注音練習</h1>
+        <p class="lead">先選一課，再練注音、玩遊戲。</p>
+        <div class="key"><span class="label">結論</span><p>先從第一課開始練。</p></div>
+        <label class="name" for="name"><span>我的名字</span> <input id="name" autocomplete="off" maxlength="10"></label>
+        <h2>選一課</h2>
+        <ul class="lessons" id="lessongrid"></ul>
+      </section>
+
+      <section id="lessonview" hidden>
+        <a class="back" href="#home">← 全部課程</a>
+        <div class="lessonbanner"><img id="lessonimg" src="images/lesson1.jpg" alt=""><div><h1 id="lessontitle"></h1><p class="lead">選一個來練習。</p></div></div>
+        <div class="key"><span class="label">結論</span><p>先做注音考題，再玩搶答和遊戲。</p></div>
+        <ul class="acts" id="actlist"></ul>
+      </section>
+
+      <section id="playview" hidden>
+        <div class="crumb">
+          <a class="back" id="playback" href="#home">← 回去</a>
+          <span class="crumbtitle" id="playtitle"></span>
           <label class="mixrow" id="mixrow" for="mix"><input type="checkbox" id="mix"> <span>混合出題</span></label>
         </div>
-      </div>
-      <div id="lessonhead" hidden></div>
-      <div class="prog" id="prog" aria-hidden="true"></div>
-      <div id="main" aria-live="polite"></div>
+        <div class="prog" id="prog" aria-hidden="true"></div>
+        <div id="main" aria-live="polite"></div>
+      </section>
+
       <details class="parent">
         <summary>給家長看</summary>
         <p>這個網站依照康軒版一年級上學期注音第一到第九課的進度製作，是自編練習，不是出版社官方教材。語詞取自孩子的課本、習作和小考，句子和題目都另外編寫，沒有收錄課文、習作或考卷原文。</p>
         <p>答案選項只用注音或圖片，避免孩子直接從國字猜答案。注音由人工和程式整理，可能有誤，請老師或懂注音的家長校對。</p>
-        <p>語音由裝置內建的中文語音朗讀，部分符號的念法可能和老師教的略有不同。姓名、分數和星星只存在這台裝置上，不會上傳。</p>
+        <p>語音由裝置內建的中文語音朗讀，部分符號的念法可能和老師教的略有不同。名字、分數和星星只存在這台裝置上，不會上傳。</p>
       </details>
     </main>
     <footer><div class="wrap">插圖由 Google Gemini 生成。自編練習，不是出版社官方教材。</div></footer>
