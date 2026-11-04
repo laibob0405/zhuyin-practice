@@ -20,8 +20,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap">
-  <link rel="stylesheet" href="style.css?v=5">
-  <script src="app.js?v=5" defer></script>
+  <link rel="stylesheet" href="style.css?v=6">
+  <script src="app.js?v=6" defer></script>
 </head>
 <body>
   <div class="app">
@@ -66,6 +66,14 @@
         <p>這個網站依照康軒版一年級上學期注音第一到第九課的進度製作，是自編練習，不是出版社官方教材。語詞取自孩子的課本、習作和小考，句子和題目都另外編寫，沒有收錄課文、習作或考卷原文。</p>
         <p>答案選項只用注音或圖片，避免孩子直接從國字猜答案。注音由人工和程式整理，可能有誤，請老師或懂注音的家長校對。</p>
         <p>語音由裝置內建的中文語音朗讀，部分符號的念法可能和老師教的略有不同。名字、分數和星星只存在這台裝置上，不會上傳。</p>
+        <div class="voiceset">
+          <p><strong>語音設定</strong>（只存在這台裝置）</p>
+          <label for="voicepick">聲音</label> <select id="voicepick"></select>
+          <p id="voicenote" class="voicenote"></p>
+          <fieldset><legend>速度</legend><label><input type="radio" name="speed" value="slow"> 慢</label> <label><input type="radio" name="speed" value="normal"> 一般</label> <label><input type="radio" name="speed" value="fast"> 快</label></fieldset>
+          <button type="button" id="voicetest">試聽</button>
+          <p>聲音最自然的是 Microsoft Edge 瀏覽器裡名稱有「Natural」的臺灣國語語音，或 Chrome 的「Google 國語（臺灣）」。注音符號用課本的念法（例如ㄅ念「玻」），每個符號會念兩次。</p>
+        </div>
       </details>
     </main>
     <footer><div class="wrap">插圖由 Google Gemini 生成。自編練習，不是出版社官方教材。</div></footer>

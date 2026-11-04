@@ -190,21 +190,60 @@ function buildExam(){
   return shuffle(exam);
 }
 let page='home',mode='quiz',lesson=LESSONS[0],qs=[],i=0,mixed=store.get('mixed')==='1';
+// 語音：優先用臺灣國語的自然語音，放慢速度；避免選到粵語（zh-HK）或其他語言。
+const SYMREAD=new Set(LESSONS.flatMap(l=>l.sym.map(x=>x[1]).filter(Boolean)));
+const SPEEDS={slow:.55,normal:.7,fast:.85};
+let voiceList=[];
+function voiceScore(v){
+  const lang=(v.lang||'').replace('_','-').toLowerCase(),name=v.name||'';
+  if(/hk|yue|cantonese|粵/i.test(lang+' '+name))return -1;
+  let s=lang==='zh-tw'?100:/taiwan|臺灣|台灣/i.test(name)?90:lang==='zh-cn'||lang==='cmn-cn'?40:lang.startsWith('zh')?20:-1;
+  if(s<0)return s;
+  if(/natural|neural|online/i.test(name))s+=30;
+  if(/google/i.test(name))s+=15;
+  return s;
+}
+function loadVoices(){
+  if(!('speechSynthesis' in window))return;
+  voiceList=speechSynthesis.getVoices().filter(v=>voiceScore(v)>=0).sort((x,y)=>voiceScore(y)-voiceScore(x));
+  fillVoicePicker();
+}
+function pickVoice(){
+  const want=store.get('voice');
+  return voiceList.find(v=>v.name===want)||voiceList[0]||null;
+}
 function say(text){
   const hint=$('hint');
-  const show=()=>{if(hint)hint.textContent='這台裝置無法播放中文語音，請家長念出：'+text};
+  const show=()=>{if(hint)hint.textContent='這台裝置沒有合適的中文語音，請家長念出：'+text};
   if(!('speechSynthesis' in window))return show();
-  const v=speechSynthesis.getVoices();
-  const voice=v.find(x=>/zh[-_]TW/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang));
-  if(v.length&&!voice)return show();
+  if(!voiceList.length)loadVoices();
+  const all=speechSynthesis.getVoices();
+  const voice=pickVoice();
+  if(all.length&&!voice)return show();
+  const base=SPEEDS[store.get('speed')]||SPEEDS.normal;
+  const symbol=SYMREAD.has(text);
   try{
     speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang='zh-TW';u.rate=.8;if(voice)u.voice=voice;
-    u.onerror=e=>{if(e.error!=='canceled'&&e.error!=='interrupted')show()};
-    speechSynthesis.speak(u);
+    const parts=symbol?[text,text]:[text];
+    parts.forEach((p,n)=>{
+      const u=new SpeechSynthesisUtterance(p);
+      u.lang=voice?voice.lang:'zh-TW';
+      if(voice)u.voice=voice;
+      u.rate=symbol?base*.9:base;
+      u.pitch=1;
+      if(n===0)u.onerror=e=>{if(e.error!=='canceled'&&e.error!=='interrupted')show()};
+      speechSynthesis.speak(u);
+    });
   }catch(e){show()}
 }
+function fillVoicePicker(){
+  const sel=$('voicepick');if(!sel)return;
+  const want=store.get('voice');
+  sel.innerHTML=voiceList.length?voiceList.map(v=>'<option value="'+v.name.replace(/"/g,'&quot;')+'"'+(v.name===(want||voiceList[0].name)?' selected':'')+'>'+v.name+'（'+v.lang+'）</option>').join(''):'<option>找不到中文語音</option>';
+  const note=$('voicenote');
+  if(note){const v=pickVoice();note.textContent=!v?'這台裝置沒有中文語音。':(v.lang||'').toLowerCase().replace('_','-')==='zh-tw'?'':'目前沒有臺灣國語語音，聲調和用字可能和課本不同。'}
+}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.addEventListener('voiceschanged',loadVoices)}
 function renderTabs(){applyTheme();updateStars()}
 function renderProg(){
   $('prog').innerHTML=qs.map((q,n)=>'<i class="'+(n<i?(q.missed?'miss':'on'):n===i?'now':'')+'"></i>').join('');
@@ -358,6 +397,9 @@ $('main').addEventListener('click',e=>{
 $('mix').checked=mixed;
 $('mix').addEventListener('change',e=>{mixed=e.target.checked;store.set('mixed',mixed?'1':'0');start(lesson)});
 $('name').value=store.get('name')||'';
+$('voicepick').addEventListener('change',e=>{store.set('voice',e.target.value);fillVoicePicker()});
+document.querySelectorAll('[name=speed]').forEach(r=>{r.checked=r.value===(store.get('speed')||'normal');r.addEventListener('change',()=>store.set('speed',r.value))});
+$('voicetest').addEventListener('click',()=>{say('玻');setTimeout(()=>say('貓咪抱皮包'),2200)});
 $('name').addEventListener('input',e=>store.set('name',e.target.value));
 if('speechSynthesis' in window)speechSynthesis.getVoices();
 let gTimers=[];
